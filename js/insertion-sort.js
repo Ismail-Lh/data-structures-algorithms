@@ -22,4 +22,20 @@ function insertionAlg(arr) {
   return arr;
 }
 
-console.log(insertionAlg([99, 2, 44, 15, 10, 8, 5]));
+// console.log(insertionAlg([99, 2, 44, 15, 10, 8, 5]));
+
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    const currVal = arr[i];
+
+    for (var j = i - 1; j >= 0 && arr[j] > currVal; j--) {
+      arr[j + 1] = arr[j];
+    }
+
+    arr[j + 1] = currVal;
+  }
+
+  return arr;
+}
+
+console.log(insertionSort([99, 2, 44, 15, 10, 8, 5]));
