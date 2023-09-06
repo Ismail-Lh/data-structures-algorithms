@@ -43,4 +43,26 @@ function merge(arr1, arr2) {
   return mergedArr;
 }
 
-console.log(merge([1, 4, 5, 6, 9], [-1, 0, 2, 3, 7, 10, 12]));
+// Define a function called mergeSort that implements the merge sort algorithm to sort an array.
+function mergeSort(arr) {
+  // Base case: If the array has one or fewer elements, it is already sorted.
+  if (arr.length <= 1) return arr;
+
+  // Find the middle index of the array.
+  let mid = Math.floor(arr.length / 2);
+
+  // Recursively call mergeSort on the left half of the array and store the result in the 'left' variable.
+  let left = mergeSort(arr.slice(0, mid));
+
+  // Recursively call mergeSort on the right half of the array and store the result in the 'right' variable.
+  let right = mergeSort(arr.slice(mid));
+
+  // Call the 'merge' function to merge the sorted 'left' and 'right' arrays and return the result.
+  return merge(left, right);
+}
+
+console.log(
+  mergeSort([
+    100, 20, 13, 18, 0, -1, 7, 98, 32, 10, 2, 6, 14, 25, 15, 32, 18, 48, 22,
+  ])
+);
