@@ -45,4 +45,4 @@ const arr = [
   95, 96, 99, 100,
 ];
 
-console.log(binary_search(arr, 4));
+console.log(binary_search(arr, 2));
