@@ -20,7 +20,7 @@
 // # if guess > item:
 // # high = mid - 1
 
-const binary_search = (arr, item) => {
+const binary_search = (arr, target) => {
   let low = 0;
   let high = arr.length - 1;
 
@@ -28,16 +28,16 @@ const binary_search = (arr, item) => {
     const mid = Math.floor((low + high) / 2);
     const guess = arr[mid];
 
-    if (guess === item) {
-      return mid;
-    } else if (guess > item) {
+    if (guess === target) return mid;
+
+    if (guess > target) {
       high = mid - 1;
     } else {
       low = mid + 1;
     }
   }
 
-  return null;
+  return -1;
 };
 
 const arr = [
@@ -45,4 +45,4 @@ const arr = [
   95, 96, 99, 100,
 ];
 
-console.log(binary_search(arr, 2));
+console.log(binary_search(arr, 7));
