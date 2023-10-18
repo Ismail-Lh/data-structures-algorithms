@@ -1,12 +1,20 @@
+// let tmp = arr[j];
+// arr[j] = arr[j + 1];
+// arr[j + 1] = tmp;
+
+const swap = (arr, idx) =>
+  ([arr[idx], arr[idx + 1]] = [arr[idx + 1], arr[idx]]);
+
+// !: BIG-O ---> O(n²)
 function bubble_sort(arr) {
-  for (let i = 0; i < arr.length; i++) {
+  const last_index = arr.length - 1;
+
+  for (let i = last_index; i > 0; i--) {
     let swapped = false;
 
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] > arr[j]) {
-        let tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
+    for (let j = 0; j < i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        swap(arr, j);
 
         swapped = true;
       }
@@ -18,4 +26,4 @@ function bubble_sort(arr) {
   return arr;
 }
 
-console.log(bubble_sort([5, 3, 4, 1, 2, 0, -2, -1, -10]));
+console.log(bubble_sort([5, 0, 1, 8, 6, 2, 3, 4]));
