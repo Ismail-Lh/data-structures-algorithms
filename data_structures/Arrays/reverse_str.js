@@ -40,6 +40,17 @@ function reverse_str_4(str) {
   return reversed;
 }
 
+function reverse_str_5(str) {
+  const reversed_str = [];
+  let lastIndex = str.length - 1;
+
+  for (let i = 0; i <= str.length - 1; i++, lastIndex--) {
+    reversed_str[i] = str[lastIndex];
+  }
+
+  return reversed_str.join("");
+}
+
 console.log(reverse_str_1("hello world"));
 console.log(reverse_str_2("hello world"));
 console.log(reverse_str_3("hello world"));
