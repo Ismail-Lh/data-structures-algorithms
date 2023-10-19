@@ -9,7 +9,7 @@ class MyArray {
     return this.data[index];
   }
 
-  // !: Add item to the beginning of that data object (array)
+  // !: Add item to the end of data object (array)
   push(item) {
     this.data[this.length] = item;
     this.length++;
