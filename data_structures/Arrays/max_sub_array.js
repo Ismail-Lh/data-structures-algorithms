@@ -42,7 +42,32 @@ function maxSubArray_1(nums) {
   return maxSum;
 }
 
-console.log(maxSubArray_1([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // output = 6
-console.log(maxSubArray_1([1])); // output = 1
-console.log(maxSubArray_1([5, 4, -1, 7, 8])); // output = 23
-console.log(maxSubArray_1([])); // output = null
+// console.log(maxSubArray_1([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // output = 6
+// console.log(maxSubArray_1([1])); // output = 1
+// console.log(maxSubArray_1([5, 4, -1, 7, 8])); // output = 23
+// console.log(maxSubArray_1([])); // output = null
+
+// !: BIG-O --> O(n) --> Linear time
+function maxSubArray_2(nums) {
+  if (!nums.length) return null;
+
+  if (nums.length === 1) return nums[0];
+
+  let maxSum = nums[0];
+  let curSum = maxSum;
+
+  for (let i = 1; i < nums.length; i++) {
+    curSum = Math.max(curSum + nums[i], nums[i]);
+    console.log(`------------- CURRENT SUM ${curSum} ---------------`);
+    maxSum = Math.max(curSum, maxSum);
+    console.log("**************************");
+    console.log(`------------- MAXIMUM SUM SO FAR ${maxSum} -----------`);
+    console.log("*************************************************");
+  }
+  return maxSum;
+}
+
+console.log(maxSubArray_2([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // output = 6
+console.log(maxSubArray_2([1])); // output = 1
+console.log(maxSubArray_2([5, 4, -1, 7, 8])); // output = 23
+console.log(maxSubArray_2([]));
