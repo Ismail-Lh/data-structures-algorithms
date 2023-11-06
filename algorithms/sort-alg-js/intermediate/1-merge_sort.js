@@ -45,7 +45,7 @@
 //   return mergedArray;
 // }
 
-function mergeSortedArrays(arr1, arr2) {
+function merge(arr1, arr2) {
   const mergedArray = [];
 
   let i = 0,
@@ -70,4 +70,14 @@ function mergeSortedArrays(arr1, arr2) {
   return [...mergedArray, ...arr1Remaining, ...arr2Remaining];
 }
 
-console.log(mergeSortedArrays(["a", "c", "e", "g"], ["A", "b", "C", "d", "f"]));
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+
+  let arrMid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, arrMid));
+  let right = mergeSort(arr.slice(arrMid));
+
+  return merge(left, right);
+}
+
+console.log(mergeSort([1, 4, 7, 9, 2, 5, 12]));
