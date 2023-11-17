@@ -29,6 +29,49 @@ class LinkedList {
 
     this.length++;
   }
+
+  // Inserts a new node with the given value at the specified index in the list
+  insert(index, value) {
+    // If the index is greater than or equal to the length, append the value to the end
+    if (index >= this.length) {
+      return this.append(value);
+    }
+
+    // If the index is 0 or negative, prepend the value to the beginning
+    if (index === 0 || index < 0) {
+      return this.prepend(value);
+    }
+
+    // Create a new node with the given value
+    const newNode = new Node(value);
+    // Start at the head of the list
+    let currNode = this.head;
+    let i = 0;
+
+    // Traverse the list to find the node at index - 1
+    while (i < index - 1) {
+      currNode = currNode.next;
+      i++;
+    }
+
+    // Insert the new node into the list at the specified index
+    newNode.next = currNode.next;
+    currNode.next = newNode;
+
+    this.length++;
+  }
+
+  printList() {
+    const arr = [];
+    let currNode = this.head;
+
+    while (currNode) {
+      arr.push(currNode.value);
+      currNode = currNode.next;
+    }
+
+    return arr;
+  }
 }
 
 // 6 -> 10 -> 5 -> 16
@@ -37,8 +80,13 @@ const linkedList = new LinkedList(10);
 linkedList.append(5);
 linkedList.append(16);
 linkedList.prepend(6);
+linkedList.insert(124, 8);
+linkedList.insert(0, 8);
+linkedList.insert(3, 2);
 
 console.log(linkedList);
+
+console.log(linkedList.printList());
 
 console.log("************************************");
 
