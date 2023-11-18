@@ -61,6 +61,52 @@ class LinkedList {
     this.length++;
   }
 
+  // Removes the node at the specified index in the list
+  remove(index) {
+    // If the index is greater than or equal to the length, remove the last node
+    if (index >= this.length) {
+      this.remove(this.length - 1);
+      return;
+    }
+
+    // Start at the head of the list
+    let currNode = this.head;
+    let i = 0;
+
+    if (index === 0) {
+      this.head = this.head.next;
+    } else {
+      // Traverse the list to find the node at index - 1
+      while (i < index - 1) {
+        currNode = currNode.next;
+        i++;
+      }
+
+      // Identify the node to be deleted and update the next pointer of the previous node
+      const deletedNode = currNode.next;
+      currNode.next = deletedNode.next;
+    }
+
+    // Decrement the length of the list
+    this.length--;
+  }
+
+  search(value) {
+    let currNode = this.head;
+    let i = 0;
+
+    while (currNode.next) {
+      if (currNode.value === value) {
+        return i;
+      }
+
+      currNode = currNode.next;
+      i++;
+    }
+
+    return -1;
+  }
+
   printList() {
     const arr = [];
     let currNode = this.head;
@@ -84,9 +130,17 @@ linkedList.insert(124, 8);
 linkedList.insert(0, 8);
 linkedList.insert(3, 2);
 
+console.log(linkedList.search(20));
+
 console.log(linkedList);
 
-console.log(linkedList.printList());
+linkedList.remove(0);
+console.log(linkedList);
+linkedList.remove(0);
+
+console.log("************************************");
+
+console.log(linkedList);
 
 console.log("************************************");
 
@@ -126,11 +180,11 @@ class LinkedListEmpty {
   }
 }
 
-const linkedListEmpty = new LinkedListEmpty();
+// const linkedListEmpty = new LinkedListEmpty();
 
-linkedListEmpty.append(10);
-linkedListEmpty.append(5);
-linkedListEmpty.append(16);
-linkedListEmpty.prepend(6);
+// linkedListEmpty.append(10);
+// linkedListEmpty.append(5);
+// linkedListEmpty.append(16);
+// linkedListEmpty.prepend(6);
 
-console.log(linkedListEmpty);
+// console.log(linkedListEmpty);
