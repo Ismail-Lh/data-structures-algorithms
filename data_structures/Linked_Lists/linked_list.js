@@ -30,20 +30,75 @@ class LinkedList {
     this.length++;
   }
 
+  // Inserts a new node with the given value after the specified node value
+  insertAfterAGivenNode(givenNodeVal, newNodeVal) {
+    // Create a new node with the given value
+    const newNode = new Node(newNodeVal);
+    // Start at the head of the list
+    let currNode = this.head;
+
+    // Traverse the list to find the node at giveNodeVal
+    while (currNode && currNode.value != givenNodeVal) {
+      currNode = currNode.next;
+    }
+
+    // Check if the node with the given value is found
+    if (currNode) {
+      // Insert the new node into the list after the node with the given value
+      newNode.next = currNode.next;
+      currNode.next = newNode;
+
+      this.length++;
+    } else {
+      // Node with given value not found, you may choose to handle this case accordingly
+      console.log(`Node with value ${givenNodeVal} not found in the list.`);
+    }
+  }
+
+  // Inserts a new node with the given value before the specified node value
+  insertBeforeAGivenNode(givenNodeVal, newNodeVal) {
+    // Create a new node with the given value
+    const newNode = new Node(newNodeVal);
+    // Start at the head of the list
+    let currNode = this.head;
+    let prevNode = null;
+
+    // Traverse the list to find the node at index - 1
+    while (currNode && currNode.value != givenNodeVal) {
+      prevNode = currNode;
+      currNode = currNode.next;
+    }
+
+    // Check if the node with the given value is found
+    if (currNode) {
+      // Insert the new node into the list before the node with the given value
+      newNode.next = currNode;
+
+      if (prevNode) prevNode.next = newNode;
+      // If there is no previous node, it means we are inserting at the beginning
+      else this.head = newNode;
+
+      this.length++;
+    } else {
+      // Node with given value not found, you may choose to handle this case accordingly
+      console.log(`Node with value ${givenNodeVal} not found in the list.`);
+    }
+  }
+
   // Inserts a new node with the given value at the specified index in the list
-  insert(index, value) {
+  insertInAGivenIndex(index, newNodeVal) {
     // If the index is greater than or equal to the length, append the value to the end
     if (index >= this.length) {
-      return this.append(value);
+      return this.append(newNodeVal);
     }
 
     // If the index is 0 or negative, prepend the value to the beginning
     if (index === 0 || index < 0) {
-      return this.prepend(value);
+      return this.prepend(newNodeVal);
     }
 
     // Create a new node with the given value
-    const newNode = new Node(value);
+    const newNode = new Node(newNodeVal);
     // Start at the head of the list
     let currNode = this.head;
     let i = 0;
@@ -54,7 +109,6 @@ class LinkedList {
       i++;
     }
 
-    // Insert the new node into the list at the specified index
     newNode.next = currNode.next;
     currNode.next = newNode;
 
@@ -126,23 +180,30 @@ const linkedList = new LinkedList(10);
 linkedList.append(5);
 linkedList.append(16);
 linkedList.prepend(6);
-linkedList.insert(124, 8);
-linkedList.insert(0, 8);
-linkedList.insert(3, 2);
 
-console.log(linkedList.search(20));
+console.log(linkedList.printList());
 
-console.log(linkedList);
+linkedList.insertInAGivenIndex(124, 8);
+linkedList.insertInAGivenIndex(0, 8);
 
-linkedList.remove(0);
-console.log(linkedList);
-linkedList.remove(0);
+// console.log(linkedList.search(20));
+console.log(linkedList.printList());
 
-console.log("************************************");
+linkedList.insertAfterAGivenNode(5, 7);
+linkedList.insertBeforeAGivenNode(5, 7);
+linkedList.insertAfterAGivenNode(16, 4);
+linkedList.insertBeforeAGivenNode(4, 0);
+console.log(linkedList.printList());
 
-console.log(linkedList);
+// linkedList.remove(0);
+// console.log(linkedList);
+// linkedList.remove(0);
 
-console.log("************************************");
+// console.log("************************************");
+
+// console.log(linkedList);
+
+// console.log("************************************");
 
 class LinkedListEmpty {
   constructor() {
