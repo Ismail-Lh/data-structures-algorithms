@@ -161,6 +161,27 @@ class LinkedList {
     return -1;
   }
 
+  // Method that concat two Linked lists
+  concat(secondList) {
+    if (!secondList || !secondList.head) {
+      // If the second list is empty or undefined, there's nothing to concatenate
+      return;
+    }
+
+    // If the current list is empty, simply set its head to the head of the second list
+    if (!this.head) {
+      this.head = secondList.head;
+      this.tail = secondList.tail;
+    } else {
+      // Otherwise, find the tail of the current list and connect it to the head of the second list
+      this.tail.next = secondList.head;
+      this.tail = secondList.tail;
+    }
+
+    // Update the length of the current list
+    this.length += secondList.length;
+  }
+
   printList() {
     const arr = [];
     let currNode = this.head;
@@ -175,25 +196,36 @@ class LinkedList {
 }
 
 // 6 -> 10 -> 5 -> 16
-const linkedList = new LinkedList(10);
+const linkedList_1 = new LinkedList(2);
 
-linkedList.append(5);
-linkedList.append(16);
-linkedList.prepend(6);
+linkedList_1.append(3);
+linkedList_1.append(4);
+linkedList_1.prepend(1);
 
-console.log(linkedList.printList());
+// console.log(linkedList_1.printList());
 
-linkedList.insertInAGivenIndex(124, 8);
-linkedList.insertInAGivenIndex(0, 8);
+// linkedList_1.insertInAGivenIndex(124, 8);
+linkedList_1.insertInAGivenIndex(0, 0);
 
 // console.log(linkedList.search(20));
-console.log(linkedList.printList());
+console.log(linkedList_1.printList());
 
-linkedList.insertAfterAGivenNode(5, 7);
-linkedList.insertBeforeAGivenNode(5, 7);
-linkedList.insertAfterAGivenNode(16, 4);
-linkedList.insertBeforeAGivenNode(4, 0);
-console.log(linkedList.printList());
+const linkedList_2 = new LinkedList(5);
+
+linkedList_2.append(6);
+linkedList_2.append(7);
+
+console.log(linkedList_2.printList());
+
+linkedList_1.concat(linkedList_2);
+
+console.log(linkedList_1);
+
+// linkedList_1.insertAfterAGivenNode(5, 7);
+// linkedList_1.insertBeforeAGivenNode(5, 7);
+// linkedList_1.insertAfterAGivenNode(16, 4);
+// linkedList_1.insertBeforeAGivenNode(4, 0);
+// console.log(linkedList_1.printList());
 
 // linkedList.remove(0);
 // console.log(linkedList);
