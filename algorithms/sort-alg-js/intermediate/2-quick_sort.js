@@ -46,8 +46,25 @@ function pivot(arr, start = 0, end = arr.length) {
 
   // !: At the end place the "pivotValue" at the "swapIdx" position
   swap(arr, start, swapIdx);
-  console.log(arr);
+
   return swapIdx;
 }
 
-console.log(pivot([4, 0, 2, 1, 5, 7, 6, 3]));
+function quickSort(arr, left = 0, right = arr.length) {
+  if (left < right) {
+    let pivotIndex = pivot(arr, left, right);
+
+    // !: Sort the left side of the pivotIndex
+    quickSort(arr, left, pivotIndex);
+
+    // !: Sort the right side of the pivotIndex
+    quickSort(arr, pivotIndex + 1, right);
+  }
+
+  // !: return the sorted array
+  return arr;
+}
+
+console.log(
+  quickSort([21, 22, 20, 100, 58, 4, 0, 2, 1, 5, 7, 6, 3, -1, -10, 2, 8])
+);
