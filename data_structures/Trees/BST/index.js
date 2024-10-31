@@ -112,6 +112,23 @@ class BinarySearchTree {
 
     return [root.value, ...leftValues, ...rightValues];
   }
+
+  breathFirstSearch() {
+    if (!this.root) return [];
+
+    const queue = [this.root];
+    const values = [];
+
+    while (queue.length > 0) {
+      const current = queue.shift();
+      values.push(current.value);
+
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+
+    return values;
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -127,12 +144,20 @@ tree.insert(20);
 tree.insert(10);
 tree.insert(3);
 
-// console.log(tree.depthFirstValuesRecursive());
+//          10
+//         /  \
+//        5    15
+//      / \   / \
+//    4   6  14 20
+//   /
+// 3
 
-console.log(tree.find(20));
-console.log(tree.find(5));
-console.log(tree.find(1));
-console.log(tree.find(2));
-console.log(tree.find(4));
+console.log(tree.breathFirstSearch());
+
+// console.log(tree.find(20));
+// console.log(tree.find(5));
+// console.log(tree.find(1));
+// console.log(tree.find(2));
+// console.log(tree.find(4));
 
 // console.log(JSON.stringify(tree.root, null, 2));
