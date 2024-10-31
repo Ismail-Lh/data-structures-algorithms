@@ -113,6 +113,85 @@ class BinarySearchTree {
     return [root.value, ...leftValues, ...rightValues];
   }
 
+  postOrderDepthFirst() {
+    if (!this.root) return [];
+
+    const stack = [this.root];
+    const values = [];
+    const result = [];
+
+    while (stack.length) {
+      const current = stack.pop();
+      values.push(current.value);
+
+      if (current.left) stack.push(current.left);
+      if (current.right) stack.push(current.right);
+    }
+
+    while (values.length) {
+      result.push(values.pop());
+    }
+
+    return result;
+  }
+
+  postOrderDepthFirstRecursive() {
+    if (!this.root) return [];
+
+    const values = [];
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+
+      values.push(node.value);
+    }
+
+    traverse(this.root);
+
+    return values;
+  }
+
+  inOrderDepthFirstRecursive() {
+    if (!this.root) return [];
+
+    const values = [];
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+
+      values.push(node.value);
+
+      if (node.right) traverse(node.right);
+    }
+
+    traverse(this.root);
+
+    return values;
+  }
+
+  inOrderDepthFirstIterative() {
+    if (!this.root) return [];
+
+    const stack = [];
+    const values = [];
+    let current = this.root;
+
+    while (current || stack.length > 0) {
+      while (current) {
+        stack.push(current);
+        current = current.left;
+      }
+
+      current = stack.pop();
+      values.push(current.value);
+
+      current = current.right;
+    }
+
+    return values;
+  }
+
   breathFirstSearch() {
     if (!this.root) return [];
 
@@ -152,7 +231,17 @@ tree.insert(3);
 //   /
 // 3
 
-console.log(tree.breathFirstSearch());
+// [3,4,6,5,14,20,15,10]
+console.log(`preOrder traverse -> ${tree.PreorderDepthFirst()}`);
+console.log(`postOrder traverse -> ${tree.postOrderDepthFirst()}`);
+console.log(
+  'inOrder traverse (Recursive) ->',
+  tree.inOrderDepthFirstRecursive()
+);
+console.log(
+  'inOrder traverse (Iterative) ->',
+  tree.inOrderDepthFirstIterative()
+);
 
 // console.log(tree.find(20));
 // console.log(tree.find(5));
