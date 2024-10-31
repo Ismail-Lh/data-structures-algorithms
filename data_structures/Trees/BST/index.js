@@ -87,7 +87,7 @@ class BinarySearchTree {
     return this.find(val, root.right);
   }
 
-  depthFirstValues() {
+  PreorderDepthFirst() {
     if (!this.root) return [];
 
     const stack = [this.root];
@@ -104,11 +104,11 @@ class BinarySearchTree {
     return values;
   }
 
-  depthFirstValuesRecursive(root = this.root) {
+  PreorderDepthFirstRecursive(root = this.root) {
     if (!root) return [];
 
-    const leftValues = this.depthFirstValuesRecursive(root.left);
-    const rightValues = this.depthFirstValuesRecursive(root.right);
+    const leftValues = this.PreorderDepthFirstRecursive(root.left);
+    const rightValues = this.PreorderDepthFirstRecursive(root.right);
 
     return [root.value, ...leftValues, ...rightValues];
   }
